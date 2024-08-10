@@ -7,4 +7,13 @@ class Environment {
 
   static String apiUrl =
       dotenv.env['SPOTIFY_API_URL'] ?? 'No está configurado el SPOTIFY_API_URL';
+
+  static String tokenUrl = dotenv.env['SPOTIFY_TOKEN_URL'] ??
+      'No está configurado el SPOTIFY_TOKEN_URL';
+
+  static String clientId =
+      dotenv.env['SPOTIFY_CLIENT_ID'] ?? 'No esté configurado el CLIENT_ID';
+
+  static String clientSecret = dotenv.env['SPOTIFY_CLIENT_SECRET'] ??
+      'No esté configurado el SPOTIFY_CLIENT_SECRET';
 }
