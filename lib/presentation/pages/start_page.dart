@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../config/theme/app_theme.dart';
+import '../pages.dart';
 import '../widgets/widgets.dart';
 
-class UserPage extends StatelessWidget {
-  const UserPage({super.key});
+class StartPage extends StatelessWidget {
+  const StartPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +60,14 @@ class UserPage extends StatelessWidget {
                     fontColor: color5,
                     svgPath: 'assets/icons/facebook-icon.svg',
                     buttonText: "Continuar con Facebook"),
-                const CustomTextButton(
-                    fontColor: color5, buttonText: 'Iniciar sesión'),
+                CustomTextButton(
+                  fontColor: color5,
+                  buttonText: 'Iniciar sesión',
+                  onPressed: () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (_) => const LoginPage()));
+                  },
+                ),
                 const Spacer(),
               ],
             ),

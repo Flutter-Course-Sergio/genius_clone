@@ -19,7 +19,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme().getTheme(),
-      home: const LoginPage(),
+      home: const StartPage(),
     );
   }
 }
