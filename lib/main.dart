@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:genius_clone/presentation/pages/user_page.dart';
 
 import 'config/constants/environment.dart';
-import 'presentation/providers/token/token_provider.dart';
+import 'presentation/providers/providers.dart';
 
 void main() async {
   await Environment.initEnvironment();
@@ -20,18 +21,26 @@ class MainApp extends ConsumerStatefulWidget {
 class _MainAppState extends ConsumerState<MainApp> {
   @override
   void initState() {
-    ref.read(tokenRiverpodProvider.notifier).getToken();
+    ref.read(tokenProvider.notifier).getToken();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: Text('Hola mundo'),
-        ),
-      ),
+          body: FutureBuilder(
+              future: ref.read(tokenProvider.notifier).getToken(),
+              builder: (_, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Text('An error occurred: ${snapshot.error}');
+                } else {
+                  final token = ref.watch(tokenProvider);
+                  return UserPage(token: token);
+                }
+              })),
     );
   }
 }
