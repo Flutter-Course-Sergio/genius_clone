@@ -20,7 +20,6 @@ class AppTheme {
               fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
       filledButtonTheme: FilledButtonThemeData(
           style: ButtonStyle(
-              backgroundColor: const WidgetStatePropertyAll(color1),
               textStyle: WidgetStatePropertyAll(
                   GoogleFonts.montserratAlternates()
                       .copyWith(fontSize: 16, fontWeight: FontWeight.w700)))),

@@ -42,7 +42,11 @@ class UserPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const Spacer(),
-                const CustomFilledButton(fontColor: color3),
+                const CustomFilledButton(
+                  fontColor: color3,
+                  buttonColor: color1,
+                  buttonText: 'Registrate gratis',
+                ),
                 const CustomOutlinedIconButton(
                     fontColor: color5,
                     icon: Icons.smartphone_rounded,
