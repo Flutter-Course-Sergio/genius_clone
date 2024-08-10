@@ -1,34 +1,68 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-import '../providers/providers.dart';
+import '../../config/theme/app_theme.dart';
+import '../widgets/widgets.dart';
 
-class UserPage extends ConsumerStatefulWidget {
-  String token;
-
-  UserPage({super.key, required this.token});
-
-  @override
-  ConsumerState<UserPage> createState() => _UserPageState();
-}
-
-class _UserPageState extends ConsumerState<UserPage> {
-  @override
-  void initState() {
-    ref.read(userProvider.notifier).getCurrentUser(widget.token);
-    super.initState();
-  }
+class UserPage extends StatelessWidget {
+  const UserPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final user = ref.watch(userProvider).user;
-
-    final username = user != null ? user.name : "No name";
+    final textStyles = Theme.of(context).textTheme;
+    final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      body: Center(
-        child: Text(username),
+        body: Container(
+      width: double.infinity,
+      decoration: const BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              stops: [0.0, 0.1, 0.2, 0.4],
+              colors: [color5, color4, color2, color3])),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          const Spacer(),
+          SvgPicture.asset(
+            'assets/icons/spotify-icon.svg',
+            color: Colors.white,
+          ),
+          const Spacer(),
+          SizedBox(
+            width: double.infinity,
+            height: size.height * 0.5,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  'Millones de canciones.\nGratis en Spotify.',
+                  style: textStyles.titleSmall,
+                  textAlign: TextAlign.center,
+                ),
+                const Spacer(),
+                const CustomFilledButton(fontColor: color3),
+                const CustomOutlinedIconButton(
+                    fontColor: color5,
+                    icon: Icons.smartphone_rounded,
+                    buttonText: "Continuar con número de teléfono"),
+                const CustomOutlinedSvgButton(
+                    fontColor: color5,
+                    svgPath: 'assets/icons/google-icon.svg',
+                    buttonText: "Continuar con Google"),
+                const CustomOutlinedSvgButton(
+                    fontColor: color5,
+                    svgPath: 'assets/icons/facebook-icon.svg',
+                    buttonText: "Continuar con Facebook"),
+                const CustomTextButton(
+                    fontColor: color5, buttonText: 'Iniciar sesión'),
+                const Spacer(),
+              ],
+            ),
+          )
+        ],
       ),
-    );
+    ));
   }
 }
